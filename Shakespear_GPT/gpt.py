@@ -1,3 +1,5 @@
+# Transformer implementing aspects from "Attention Is All You Need" paper to replicate Shakespeare-like text
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -116,7 +118,7 @@ class Block(nn.Module):
         self.ln2 = nn.LayerNorm(n_embd)
 
     def forward(self, x):
-        x = x + self.sa_heads(self.ln1(x)) # deviating from paper to apply ln before sa_heads and feedfwd instead of after
+        x = x + self.sa_heads(self.ln1(x)) # deviating from paper to apply ln before sa_heads and feedfwd instead of after, also differs from paper's model struct as LN is not in residual pathway
         x = x + self.feedfwd(self.ln2(x)) # this is done on a per token level (independent of one another)--> letting each token "think" on the data collected thru self attention
         
         return x
