@@ -124,7 +124,7 @@ class Block(nn.Module):
 class GPTLangModel(nn.Module):
     def __init__(self):
         super().__init__()
-        # each token reads of logits for next token in table
+        # each token reads off logits for next token in table
         self.token_embd_table = nn.Embedding(n_vocab, n_embd) 
         self.position_embd_table = nn.Embedding(block_size, n_embd)
         self.blocks = nn.Sequential(Block(n_embd, 4), 
